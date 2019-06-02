@@ -1,15 +1,16 @@
 {
-    "name": "acfbentveld/laravel-datatables",
+    "name": "holacliente/laravel-datatables",
     "description": "Datatables that supports pagination and recursive searching in relations",
     "keywords": [
         "Datatables",
         "Laravel",
 		"Pagination",
-		"Models"
+		"Models",
+        "Holacliente"
     ],
-    "homepage": "https://github.com/ACFBentveld/Laravel-datatables",
+    "homepage": "https://github.com/holacliente/laravel-datatables",
     "license": "MIT",
-    "version": "2.0.26",
+    "version": "2.0.3",
     "authors": [
         {
             "name": "Wim Pruiksma",
