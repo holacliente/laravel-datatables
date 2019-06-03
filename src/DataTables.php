@@ -302,7 +302,7 @@ class DataTables extends DataTablesQueryBuilders
      */
     private function sortModel()
     {
-        $build = $this->hasSearchable ? $this->model->skip($this->start)->take($this->length) : $this->model;
+        $build = $this->hasSearchable ? ( ($this->length < 0)? $this->model : $this->model->skip($this->start)->take($this->length) ) : $this->model;
 
         $model = null;
 
