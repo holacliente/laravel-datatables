@@ -1,7 +1,7 @@
 Holacliente laravel-datatables
 ==============================
 
-[![Total Downloads](https://img.shields.io/packagist/dt/guzzlehttp/guzzle.svg?style=flat-square)](https://packagist.org/packages/holacliente/laravel-datatables)
+[![Total Downloads](https://img.shields.io/packagist/dt/holacliente/laravel-datatables.svg?style=flat-square)](https://packagist.org/packages/holacliente/laravel-datatables)
 
 Laravel Datatables
 
