@@ -68,6 +68,14 @@ class DataTables extends DataTablesQueryBuilders
      * @author Wim Pruiksma
      */
     protected $searchable;
+
+    /**
+     * Query to execute
+     *
+     * @var array
+     * @author Luis Macayo
+     */
+    protected $sql = null;
     
     /**
      * The table ID
@@ -122,6 +130,33 @@ class DataTables extends DataTablesQueryBuilders
         $this->model   = $first ? $first::query()->whereIn('id', $allowedID) : null;
         $this->table   = $first ? $empty->getTable() : null;
         $this->columns = Schema::getColumnListing($this->table);
+        return $this;
+    }
+
+    /**
+     * The query method
+     * Get results from query sql
+     *
+     * @param \Illuminate\Database\Eloquent\Collection $collection
+     * @return $this
+     * @throws DataTablesException
+     * @author Luis Macayo
+     */
+    public function query($query)
+    {
+        $this->sql = $query;
+
+        // $this->instanceCheck($collection);
+        // $allowedID     = $collection->pluck('id');
+        // $first         = $collection->first();
+        // $empty         = $first ? new $first : null;
+
+        $this->build();
+
+        $this->model   = null;
+        $this->table   = null;
+        // $this->columns = Schema::getColumnListing($this->table);
+
         return $this;
     }
 
@@ -280,12 +315,21 @@ class DataTables extends DataTablesQueryBuilders
 
         $build = collect([]);        
 
-        if($model){
-			$model->each(function($item, $key) use ($build) {
-				$build->put($key+$this->start, $item);
-			});
-			
+        if( $this->sql !== null ){
+            foreach (DB::select($this->sql) as $key => $item) {
+                $build->put($key, $item);
+            }
+
             $collection  = $this->encryptKeys( $build->unique()->values()->toArray() );
+
+        } else {
+            if($model){
+                $model->each(function($item, $key) use ($build) {
+                    $build->put($key+$this->start, $item);
+                });
+                
+                $collection  = $this->encryptKeys( $build->unique()->values()->toArray() );
+            }
         }
         
         $data['recordsTotal']    = $count;
