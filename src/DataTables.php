@@ -75,7 +75,7 @@ class DataTables extends DataTablesQueryBuilders
      * @var array
      * @author Luis Macayo
      */
-    protected $draw;
+    protected $draw = 0;
 
     /**
      * Query to execute
