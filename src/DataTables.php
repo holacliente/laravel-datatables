@@ -70,6 +70,14 @@ class DataTables extends DataTablesQueryBuilders
     protected $searchable;
 
     /**
+     * Cursor to seek sql
+     *
+     * @var array
+     * @author Luis Macayo
+     */
+    protected $draw;
+
+    /**
      * Query to execute
      *
      * @var array
