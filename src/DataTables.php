@@ -7,6 +7,8 @@ use Request;
 use Schema;
 use ACFBentveld\DataTables\DataTablesQueryBuilders;
 
+use Illuminate\Support\Facades\DB;
+
 /**
  * An laravel jquery datatables package
  *
