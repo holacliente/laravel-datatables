@@ -300,7 +300,7 @@ class DataTables extends DataTablesQueryBuilders
         $response = response()->json($data);
 
         foreach($response->headers->all() as $header => $value){
-            $set = implode($value, ',');
+            $set = implode(',', $value);
             header("$header: $set");
         }
         echo $response->getContent();
