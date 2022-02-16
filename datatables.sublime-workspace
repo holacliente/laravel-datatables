@@ -1,0 +1,1157 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"end",
+				"end_at"
+			],
+			[
+				"be",
+				"begin_at"
+			],
+			[
+				"Bil",
+				"Billing"
+			],
+			[
+				"forea",
+				"foreach"
+			],
+			[
+				"req",
+				"request"
+			],
+			[
+				"aja",
+				"ajax"
+			],
+			[
+				"conte",
+				"contentType"
+			],
+			[
+				"getP",
+				"getPdfPath"
+			],
+			[
+				"show",
+				"showImage"
+			],
+			[
+				"col-md",
+				"col-md-offset-3"
+			],
+			[
+				"bat",
+				"batch_id"
+			],
+			[
+				"report",
+				"report_id"
+			],
+			[
+				"att",
+				"attr\t.attr() - single"
+			],
+			[
+				"pape",
+				"papeletas_id"
+			],
+			[
+				"camp",
+				"campaign_id"
+			],
+			[
+				"dele",
+				"deletedir"
+			],
+			[
+				"ad",
+				"adjunto_1"
+			],
+			[
+				"can",
+				"canceled"
+			],
+			[
+				"resu",
+				"result"
+			],
+			[
+				"js",
+				"json\tblade-json"
+			],
+			[
+				"pa",
+				"page"
+			],
+			[
+				"campa",
+				"campaign_id"
+			],
+			[
+				"sw",
+				"switch"
+			],
+			[
+				"swi",
+				"switch"
+			],
+			[
+				"swit",
+				"switch"
+			],
+			[
+				"ben",
+				"benchmark_id"
+			],
+			[
+				"cus",
+				"customers"
+			],
+			[
+				"mar",
+				"margin-right"
+			],
+			[
+				"h",
+				"highestRow"
+			],
+			[
+				"hi",
+				"highestColumn"
+			],
+			[
+				"new",
+				"newstyle"
+			],
+			[
+				"pap",
+				"papeleta"
+			],
+			[
+				"backg",
+				"background-position\tproperty"
+			],
+			[
+				"cam",
+				"campaign"
+			],
+			[
+				"requ",
+				"request"
+			],
+			[
+				"jso",
+				"json_decode"
+			],
+			[
+				"json",
+				"json_encode"
+			],
+			[
+				"papel",
+				"papeletas"
+			],
+			[
+				"strto",
+				"strtoupper"
+			],
+			[
+				"custo",
+				"customer"
+			],
+			[
+				"campai",
+				"campaign"
+			],
+			[
+				"templ",
+				"template"
+			],
+			[
+				"pad",
+				"padding-top\tproperty"
+			],
+			[
+				"row",
+				"rowData"
+			],
+			[
+				"adju",
+				"adjunto_2"
+			],
+			[
+				"tem",
+				"template_id"
+			],
+			[
+				"requi",
+				"required_without_all"
+			],
+			[
+				"te",
+				"template_id"
+			],
+			[
+				"backgo",
+				"background-color\tproperty"
+			],
+			[
+				"_",
+				"_blank"
+			],
+			[
+				"if",
+				"if\tif"
+			],
+			[
+				"unla",
+				"unlayer"
+			],
+			[
+				"adj",
+				"adjunto_1"
+			],
+			[
+				"template",
+				"template_id"
+			],
+			[
+				"templa",
+				"templates"
+			],
+			[
+				"custom",
+				"customer_id"
+			],
+			[
+				"html",
+				"htmlFile"
+			],
+			[
+				"marg",
+				"margin\tproperty"
+			],
+			[
+				"acc",
+				"account"
+			],
+			[
+				"use",
+				"used"
+			],
+			[
+				"billi",
+				"billing_period"
+			],
+			[
+				"sub",
+				"subscribers"
+			],
+			[
+				"resul",
+				"result"
+			],
+			[
+				"par",
+				"partial_query"
+			],
+			[
+				"subs",
+				"subscribers"
+			],
+			[
+				"result",
+				"result_at"
+			],
+			[
+				"pre",
+				"prefix"
+			],
+			[
+				"batch",
+				"batch_id"
+			],
+			[
+				"min",
+				"min-height\tproperty"
+			],
+			[
+				"str",
+				"strtolower"
+			],
+			[
+				"cen",
+				"center\talign-self"
+			],
+			[
+				"order",
+				"orders"
+			],
+			[
+				"stat",
+				"stats"
+			],
+			[
+				"where",
+				"whereDate"
+			],
+			[
+				"star",
+				"startOfMonth"
+			],
+			[
+				"sta",
+				"stats"
+			],
+			[
+				"last",
+				"last_date"
+			],
+			[
+				"orde",
+				"order"
+			],
+			[
+				"remov",
+				"removeAttr\t.removeAttr()"
+			],
+			[
+				"tipo",
+				"tipo_documento"
+			],
+			[
+				"summa",
+				"get_summary"
+			],
+			[
+				"Yape",
+				"YapeConfirm"
+			],
+			[
+				"al",
+				"vertical-align\tproperty"
+			],
+			[
+				"padd",
+				"padding\tproperty"
+			],
+			[
+				"ma",
+				"max-width\tproperty"
+			],
+			[
+				"max",
+				"max-height\tproperty"
+			],
+			[
+				"back",
+				"background-size\tproperty"
+			],
+			[
+				"bac",
+				"background-image\tproperty"
+			],
+			[
+				"shi",
+				"shippment"
+			],
+			[
+				"char",
+				"charge"
+			],
+			[
+				"resp",
+				"response_txt"
+			],
+			[
+				"Paymen",
+				"PaymentNew"
+			],
+			[
+				"impue",
+				"impuesto_imponible"
+			],
+			[
+				"invo",
+				"invoice_array"
+			],
+			[
+				"inv",
+				"invoice_array"
+			],
+			[
+				"res",
+				"respuesta"
+			],
+			[
+				"seir",
+				"serie_factura"
+			],
+			[
+				"subt",
+				"sub_total"
+			],
+			[
+				"cliente",
+				"cliente_direccion"
+			],
+			[
+				"total",
+				"total_culqi"
+			],
+			[
+				"del",
+				"delivery"
+			],
+			[
+				"proper",
+				"properties"
+			],
+			[
+				"mov",
+				"movedMediaItem"
+			],
+			[
+				"ored",
+				"orderItems"
+			],
+			[
+				"Chec",
+				"CheckoutSubject"
+			],
+			[
+				"prop",
+				"property_type"
+			],
+			[
+				"car",
+				"cart_item"
+			],
+			[
+				"array_",
+				"array_keys"
+			],
+			[
+				"prope",
+				"propertyValue"
+			],
+			[
+				"ass",
+				"assignments"
+			],
+			[
+				"Rout",
+				"Route::get\tBasic Get Route."
+			],
+			[
+				"ea",
+				"each\t$.each()"
+			],
+			[
+				"eac",
+				"each\t$.each()"
+			],
+			[
+				"map",
+				"map\t.map()"
+			],
+			[
+				"selec",
+				"selectRoute"
+			],
+			[
+				"respo",
+				"response"
+			],
+			[
+				"che",
+				"checked"
+			],
+			[
+				"chil",
+				"child"
+			],
+			[
+				"eve",
+				"eventRef"
+			],
+			[
+				"club",
+				"clubRef"
+			],
+			[
+				"boo",
+				"booking_id"
+			],
+			[
+				"Aut",
+				"Auth::user\tGet the currently authenticated user."
+			],
+			[
+				"Req",
+				"Request::has\tDetermine if the request contains a non-empty value for an input item."
+			],
+			[
+				"Requ",
+				"Requests"
+			],
+			[
+				"Reque",
+				"Request::all\tGet all of the input and files for the request."
+			],
+			[
+				"pas",
+				"password"
+			],
+			[
+				"obj",
+				"object-"
+			],
+			[
+				"pro",
+				"profile"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/DataTables.php",
+			"settings":
+			{
+				"buffer_size": 16344,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+				[
+					13,
+					1,
+					"cut",
+					null,
+					"AQAAAHUdAAAAAAAAdR0AAAAAAAAHAAAAJHZhbHVlLA",
+					"AQAAAAAAAAABAAAAfB0AAAAAAAB1HQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					14,
+					1,
+					"right_delete",
+					null,
+					"AQAAAHUdAAAAAAAAdR0AAAAAAAABAAAAIA",
+					"AQAAAAAAAAABAAAAdR0AAAAAAAB1HQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					17,
+					1,
+					"insert",
+					{
+						"characters": ","
+					},
+					"AQAAAHgdAAAAAAAAeR0AAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAeB0AAAAAAAB4HQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					18,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAAHkdAAAAAAAAeh0AAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAeR0AAAAAAAB5HQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					19,
+					1,
+					"paste",
+					null,
+					"AQAAAHodAAAAAAAAgR0AAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAeh0AAAAAAAB6HQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					20,
+					1,
+					"left_delete",
+					null,
+					"AQAAAIAdAAAAAAAAgB0AAAAAAAABAAAALA",
+					"AQAAAAAAAAABAAAAgR0AAAAAAACBHQAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insall",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack",
+				"Preferences: Browse Packages"
+			],
+			[
+				"remo",
+				"Package Control: Remove Channel"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"package",
+				"Package Control: Remove Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 206.0,
+		"history":
+		[
+			"git -v",
+			"git checkout"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/xampp/htdocs/laravel-datatables",
+		"/C/xampp/htdocs/laravel-datatables/src"
+	],
+	"file_history":
+	[
+		"/C/xampp/htdocs/mailing/app/Http/Controllers/BillingController.php",
+		"/C/xampp/htdocs/mailing/app/Http/Controllers/PapeletaController.php",
+		"/C/xampp/htdocs/mailing/app/Mail/NewUser.php",
+		"/C/xampp/htdocs/mailing/app/Mail/NewReport.php",
+		"/C/xampp/htdocs/mailing/app/Mail/AproveCampaign.php",
+		"/C/xampp/htdocs/mailing/app/Mail/NewCampaign.php",
+		"/C/xampp/htdocs/mailing/resources/views/papeletas/show.blade.php",
+		"/C/xampp/htdocs/mailing/vendor/holacliente/laravel-datatables/src/DataTables.php",
+		"/C/xampp/htdocs/mailing/app/Http/Controllers/FrontendController.php",
+		"/C/xampp/htdocs/mailing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Writer/Html.php",
+		"/C/xampp/htdocs/mailing/resources/views/papeletas/create.blade.php",
+		"/C/xampp/htdocs/mailing/app/Batch.php",
+		"/C/xampp/htdocs/mailing/resources/views/layouts/dashboard/sidebar.blade.php",
+		"/C/xampp/htdocs/mailing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Shared/Date.php",
+		"/C/xampp/htdocs/mailing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Cell/AdvancedValueBinder.php",
+		"/C/xampp/htdocs/mailing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Style/NumberFormat.php",
+		"/C/xampp/htdocs/mailing/resources/views/frontend/buscar/documento.blade.php",
+		"/C/xampp/htdocs/mailing/app/Customer.php",
+		"/C/xampp/htdocs/mailing/resources/views/layouts/dashboard/navbar.blade.php",
+		"/C/xampp/htdocs/mailing/app/Billing.php",
+		"/C/xampp/htdocs/mailing/resources/views/dashboard/customers/edit.blade.php",
+		"/C/Users/Sistemas 6/AppData/Local/Temp/fz3temp-2/.env 2",
+		"/C/xampp/htdocs/mailing/.env",
+		"/C/xampp/htdocs/dumps/cruce masivos/127.0.0.1-masivo_com-20211221-1201.sql",
+		"/C/xampp/htdocs/dumps/cruce masivos/campaigns.sql",
+		"/C/xampp/htdocs/dumps/cruce masivos/spreypqy_masivope.sql",
+		"/C/Users/Sistemas 6/AppData/Local/Temp/fz3temp-2/.env",
+		"/C/Users/Sistemas 6/AppData/Local/Temp/fz3temp-2/Batch.php",
+		"/C/xampp/htdocs/mailing/resources/views/dashboard/billing/edit.blade.php",
+		"/C/xampp/htdocs/mailing/resources/views/dashboard/billing/create.blade.php",
+		"/C/xampp/htdocs/mailing/database/migrations/2021_08_11_141827_create_billings_table.php",
+		"/C/xampp/htdocs/mailing/resources/views/templates/index.blade.php",
+		"/C/Users/Sistemas 6/AppData/Local/Temp/fz3temp-2/.htaccess",
+		"/C/xampp/htdocs/mailing/resources/views/dashboard/customers/index.blade.php",
+		"/C/xampp/htdocs/mailing/app/Http/Controllers/CustomerController.php",
+		"/C/xampp/htdocs/mailing/routes/web.php",
+		"/C/xampp/htdocs/fise/.env",
+		"/C/xampp/htdocs/mailing/resources/views/campaigns/_html.blade.php",
+		"/C/xampp/htdocs/mailing/resources/views/frontend/buscar/imagen.blade.php",
+		"/C/xampp/htdocs/mailing/app/Report.php",
+		"/C/xampp/htdocs/mailing/app/Papeleta.php",
+		"/C/xampp/htdocs/mailing/app/Http/Controllers/ReportController.php",
+		"/C/xampp/htdocs/mailing/app/Http/Controllers/CampaignController.php",
+		"/C/xampp/htdocs/mailing/app/Providers/AppServiceProvider.php",
+		"/C/xampp/htdocs/mailing/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php",
+		"/C/xampp/htdocs/mailing/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php",
+		"/C/xampp/htdocs/mailing/vendor/laravel/framework/src/Illuminate/Support/Facades/Auth.php",
+		"/C/Users/Sistemas 6/Downloads/html-898.html",
+		"/C/xampp/htdocs/mailing/resources/views/reports/show.blade.php",
+		"/C/xampp/htdocs/mailing/app/Result.php",
+		"/C/Users/Sistemas 6/Downloads/res_partner.py",
+		"/C/xampp/htdocs/mailing/resources/views/reports/index.blade.php",
+		"/C/xampp/htdocs/mailing/resources/views/campaigns/index.blade.php",
+		"/C/xampp/htdocs/mailing/package.json",
+		"/C/Users/Sistemas 6/Downloads/html-823.html",
+		"/C/xampp/htdocs/mailing/vendor/holacliente/laravel-datatables/src/DataTablesQueryBuilders.php",
+		"/C/xampp/htdocs/mailing/app/Console/Commands/CleanPapeletas.php",
+		"/C/xampp/htdocs/mailing/app/Console/Kernel.php",
+		"/C/xampp/htdocs/mailing/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php",
+		"/C/xampp/htdocs/mailing/vendor/laravel/framework/src/Illuminate/Console/Scheduling/ManagesFrequencies.php",
+		"/C/xampp/htdocs/mailing/app/Traits/Meta.php",
+		"/C/xampp/htdocs/mailing/app/Campaign.php",
+		"/C/xampp/htdocs/mailing/app/Console/Commands/UpdateReport.php",
+		"/C/xampp/htdocs/mailing/config/benchmark.php",
+		"/C/xampp/htdocs/mailing/app/Exports/ReportExport.php",
+		"/C/xampp/htdocs/mailing/public/index.html",
+		"/C/xampp/htdocs/gsmproxy/vendor/laravel/framework/src/Illuminate/Support/Facades/Config.php",
+		"/C/xampp/htdocs/mailing/vendor/laracasts/flash/src/Laracasts/Flash/FlashNotifier.php",
+		"/C/xampp/htdocs/mailing/database/migrations/2021_04_09_164419_create_results_table.php",
+		"/C/xampp/htdocs/mailing/resources/views/layouts/dashboard/main.blade.php",
+		"/C/xampp/htdocs/mailing/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php",
+		"/C/xampp/htdocs/mailing/vendor/nesbot/carbon/src/JsonSerializable.php",
+		"/C/xampp/htdocs/mailing/vendor/laravel/framework/src/Illuminate/Contracts/Support/Arrayable.php",
+		"/C/xampp/htdocs/mailing/vendor/laravel/framework/src/Illuminate/Contracts/Pagination/Paginator.php",
+		"/C/xampp/htdocs/mailing/database/migrations/2018_10_30_235659_create_campaigns_table.php",
+		"/C/xampp/htdocs/mailing/vendor/lstrojny/fxmlrpc/src/fXmlRpc/Client.php",
+		"/C/xampp/htdocs/mailing/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasRelationships.php",
+		"/C/xampp/htdocs/mailing/resources/views/reports/partials/_temp.blade.php",
+		"/C/xampp/htdocs/mailing/database/migrations/2019_05_07_235426_create_reports_table.php",
+		"/C/xampp/htdocs/mailing/vendor/laravelcollective/html/src/FormBuilder.php",
+		"/C/xampp/htdocs/mailing/resources/views/reports/create.blade.php",
+		"/C/Users/Sistemas 6/Downloads/NOTARIA MAS/wp-blog-header.php",
+		"/C/Users/Sistemas 6/Downloads/NOTARIA MAS/wp-load.php",
+		"/C/Users/Sistemas 6/Downloads/NOTARIA MAS/wp-includes/functions.php",
+		"/C/Users/Sistemas 6/Downloads/NOTARIA MAS/index.php",
+		"/C/xampp/htdocs/mailing/composer.json",
+		"/C/xampp/htdocs/mailing/database/migrations/2021_03_22_140401_create_papeletas_table.php",
+		"/C/xampp/htdocs/mailing/resources/views/frontend/buscar/placa.blade.php",
+		"/C/xampp/htdocs/mailing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Style/Style.php",
+		"/C/xampp/htdocs/mailing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Style/Color.php",
+		"/C/xampp/htdocs/mailing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Style/Alignment.php",
+		"/C/xampp/htdocs/mailing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Worksheet/Drawing.php",
+		"/C/xampp/htdocs/mailing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/IOFactory.php",
+		"/C/xampp/htdocs/mailing/.gitignore",
+		"/C/xampp/htdocs/mailing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Reader/Xlsx.php",
+		"/C/xampp/htdocs/mailing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Worksheet/Worksheet.php",
+		"/C/xampp/htdocs/mailing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Writer/Xlsx/Drawing.php",
+		"/C/xampp/htdocs/mailing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Worksheet/HeaderFooter.php",
+		"/C/xampp/htdocs/mailing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Worksheet/HeaderFooterDrawing.php",
+		"/C/xampp/htdocs/mailing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Style/Supervisor.php",
+		"/C/Users/Sistemas 6/Downloads/fise.holacliente.com.access-log.txt",
+		"/C/xampp/htdocs/mailing/resources/views/papeletas/edit.blade.php",
+		"/C/xampp/htdocs/mailing/app/Imports/PapeletaImport.php",
+		"/C/xampp/htdocs/mailing/resources/views/papeletas/index.blade.php",
+		"/C/xampp/htdocs/mailing/vendor/phpoffice/phpspreadsheet/src/PhpSpreadsheet/Spreadsheet.php",
+		"/C/Users/Sistemas 6/AppData/Local/Temp/fz3temp-2/web.php",
+		"/C/Users/Sistemas 6/AppData/Local/Temp/fz3temp-2/Sms.php",
+		"/C/xampp/htdocs/mailing/app/Rejected.php",
+		"/C/xampp/htdocs/mailing/database/migrations/2019_05_28_214032_create_rejecteds_table.php",
+		"/C/xampp/htdocs/mailing/resources/views/frontend/buscar/rucdni.blade.php",
+		"/C/xampp/htdocs/mailing/resources/views/frontend/papeletas/index.blade.php",
+		"/C/xampp/htdocs/mailing/resources/views/frontend/footer.blade.php",
+		"/C/xampp/htdocs/mailing/app/Http/Controllers/TemplateController.php",
+		"/C/xampp/htdocs/mailing/app/User.php",
+		"/C/xampp/htdocs/mailing/vendor/laravel/framework/src/Illuminate/Contracts/Routing/UrlRoutable.php",
+		"/C/xampp/htdocs/mailing/vendor/ramsey/uuid/src/Uuid.php",
+		"/C/xampp/htdocs/mailing/database/migrations/2013_05_08_150505_create_customers_table.php",
+		"/C/xampp/htdocs/mailing/readme.md",
+		"/C/xampp/htdocs/mailing/vendor/laravel/framework/src/Illuminate/Http/UploadedFile.php",
+		"/C/xampp/htdocs/mailing/resources/views/dashboard/customers/create.blade.php",
+		"/C/xampp/htdocs/mailing/app/Http/Controllers/BatchController.php",
+		"/C/xampp/htdocs/mailing/app/Http/Controllers/SubscriberController.php",
+		"/C/xampp/htdocs/mailing/app/Http/Controllers/ContactController.php",
+		"/C/xampp/htdocs/mailing/app/Imports/ContactsImport.php",
+		"/C/xampp/htdocs/mailing/database/migrations/2018_05_28_171409_create_batches_table.php",
+		"/C/xampp/htdocs/mailing/app/Console/Commands/ImportContact.php",
+		"/C/xampp/htdocs/mailing/resources/views/frontend/papeletas/landing.blade.php",
+		"/C/xampp/htdocs/mailing/resources/views/templates/edit.blade.php"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 101.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"implode",
+			"(",
+			"clean",
+			"spread",
+			"NumberFormat",
+			"setFormatCode",
+			"Date",
+			"ed\\Date",
+			"AdvancedValueBinder",
+			"bindValue",
+			"formatCode",
+			"FORMAT_GENERAL",
+			"FORMAT_DATE_DDMMYYYY",
+			"FORMAT_GENERAL",
+			"toFormattedString",
+			"builtInFormatCode",
+			"fillBuiltInFormatCodes",
+			"NumberFormat",
+			"FORMAT_DATE_TIME3",
+			"getValue",
+			"generateRow",
+			"Coordinate",
+			"Date",
+			"TYPE_DATE",
+			"date",
+			"Coordinate",
+			"stringFromColumnIndex",
+			"generateRow",
+			"dd",
+			"Date",
+			"date",
+			"Date",
+			"generateRow",
+			"IOFactory::createRe",
+			"digits_between",
+			"stats",
+			"Auth::user()->percent",
+			"40",
+			"{{ Auth::user()->percent }}",
+			"Auth::user()->percent",
+			"40",
+			"dropdown-tasks",
+			"this",
+			"foreach ($billings as $billing) {\n            if( !$billing->end_at->lessThan($begin) )\n            {\n                return response()->json(['result' => false, 'message' => \"La fecha está dentro de otro ciclo\"]);\n            }\n        }",
+			"billing->end_at",
+			"Carbon",
+			"modalBilling",
+			"editBilling",
+			"disabled",
+			"lling-form",
+			"modalBilling",
+			"show",
+			"editBilling",
+			"wal.fir",
+			"customer",
+			"papeleta",
+			"modalBilling",
+			"_at\">",
+			"_at\"",
+			"id=\"",
+			"begin_at",
+			"modalBilling",
+			"btn-edit",
+			"modal-html",
+			"modal-htm",
+			"datatable",
+			"modalHtml",
+			"ustomer",
+			"modal-html",
+			"disabled",
+			"section",
+			"lg-12",
+			"disabled",
+			"n bt",
+			"\n                                    <input type=\"button\" class=\"btn",
+			"customer",
+			"Carbon",
+			"src=\"",
+			"ports.genera",
+			"eports/{report}/genera",
+			"Swal.fire",
+			"true",
+			"all",
+			"response",
+			"delete",
+			"ult::",
+			"table",
+			"--hide-modules",
+			"--no-progress",
+			"download",
+			"button",
+			"searchOnModel",
+			"searcha",
+			"ble('name')",
+			"exist",
+			"Storage",
+			"papeletas",
+			"Carbon",
+			"scope",
+			"Carbon",
+			"scope",
+			"Storage",
+			"adjunto_4",
+			"Request",
+			"Storage",
+			"return",
+			"ReportExport",
+			"Carbon",
+			"his->batch",
+			"batch_id",
+			"Rejected",
+			"batch",
+			"Excel",
+			"datatable-table",
+			"']",
+			"value",
+			"raw",
+			"b:",
+			"bounced",
+			"opened",
+			"colorDanger",
+			"morris",
+			"JsonSerializable",
+			"attributesToArray",
+			"relationsToArray",
+			"attributesToArray",
+			"opened",
+			"validTable"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/DataTables.php",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 16344,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7552,
+								7552
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3644.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.doc":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "datatables.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": false,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "mail",
+		"selected_items":
+		[
+			[
+				"mail",
+				"C:\\xampp\\htdocs\\mailing\\mailing.sublime-project"
+			],
+			[
+				"core",
+				"C:\\xampp\\htdocs\\coretech\\coretech.sublime-project"
+			],
+			[
+				"corre",
+				"C:\\xampp\\htdocs\\correos\\correos.sublime-project"
+			],
+			[
+				"caban",
+				"C:\\xampp\\htdocs\\cabani\\cabani.sublime-project"
+			],
+			[
+				"caba",
+				"C:\\xampp\\htdocs\\cabani\\cabani.sublime-project"
+			],
+			[
+				"fise",
+				"C:\\xampp\\htdocs\\fise\\fise.sublime-project"
+			],
+			[
+				"fis",
+				"C:\\xampp\\htdocs\\fise\\fise.sublime-project"
+			],
+			[
+				"",
+				"C:\\xampp\\htdocs\\voyager\\voyager.sublime-project"
+			],
+			[
+				"arthu",
+				"C:\\xampp\\htdocs\\arthur\\arthur.sublime-project"
+			],
+			[
+				"sprea",
+				"C:\\xampp\\htdocs\\spread\\spreadperu.sublime-project"
+			],
+			[
+				"gn",
+				"C:\\xampp\\htdocs\\gnet\\gnet.sublime-project"
+			],
+			[
+				"fi",
+				"C:\\xampp\\htdocs\\fise\\fise.sublime-project"
+			],
+			[
+				"gne",
+				"C:\\xampp\\htdocs\\gnet\\gnet.sublime-project"
+			],
+			[
+				"spre",
+				"C:\\xampp\\htdocs\\spread\\spreadperu.sublime-project"
+			],
+			[
+				"fac",
+				"C:\\xampp\\htdocs\\facturador\\facturador.sublime-project"
+			],
+			[
+				"op",
+				"C:\\Users\\Sistemas6\\Downloads\\opticashop\\opticas.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 345.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

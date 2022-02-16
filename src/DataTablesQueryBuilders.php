@@ -60,6 +60,22 @@ class DataTablesQueryBuilders extends Controller
     }
 
     /**
+     * Set the query builders for whereNull
+     * @author Luis Macayo
+     * fecha 16-02-2022
+     * @param string $column
+     * @return $this
+     */
+    public function whereNull(string $column)
+    {
+        $this->model   = $this->model->whereNull($column);
+        $this->where[] = [
+            $column, ' IS', ' NULL'
+        ];
+        return $this;
+    }
+
+    /**
      * Set the query builders
      *
      * @param string $column
