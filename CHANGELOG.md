@@ -3,6 +3,9 @@
 All notable changes to `DataTables` will be documented in this file
 # Version 2
 
+## 2.0.4
+-- optimize execute sql
+
 ## 2.0.26
 - Added new feuture, sorting on multiple columns
 
