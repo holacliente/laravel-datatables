@@ -324,7 +324,7 @@ class DataTables extends DataTablesQueryBuilders
     {
 
         if ($this->model && $this->search && $this->hasSearchable) {
-            // $this->model = $this->searchOnModel();
+            $this->model = $this->searchOnModel();
             // $count = $this->model->count();
         }
 
