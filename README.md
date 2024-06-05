@@ -10,9 +10,13 @@ Laravel Datatables
 - Mejora en el paginate del server side 2019
 - Funcion query para mostrar resultados de una consulta sql 25/02/2021
 
-## Query Added
+## 2024-06-04
 
-Ahora puedes ejecutar una consulta sql directo 25/02/2021
+- optimize execute function pagination in model case
+
+## 2021-02-25
+
+Ahora puedes ejecutar una consulta sql directo 
 
 
 ```php
