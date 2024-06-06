@@ -329,8 +329,8 @@ class DataTables extends DataTablesQueryBuilders
         }
 
         $this->count = $this->model ? $this->model->count() : 0;
-        $model = $this->model ? $this->sortModel() : null;
-        // $model = $this->model ?? null;
+        // $model = $this->model ? $this->sortModel() : null;
+        $model = $this->model ?? null;
 
         $build = collect([]);        
 
@@ -390,9 +390,9 @@ class DataTables extends DataTablesQueryBuilders
             }
         }
 
-        // if($this->search && !$this->hasSearchable) {
-        //     $model = $this->searchOnCollection($model);
-        // }
+        if($this->search && !$this->hasSearchable) {
+            $model = $this->searchOnCollection($model);
+        }
 
         if(!$this->hasSearchable) {
             return $model->slice($this->start, $this->length);
