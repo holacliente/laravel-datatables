@@ -323,14 +323,14 @@ class DataTables extends DataTablesQueryBuilders
     protected function execute()
     {
 
-        // if ($this->model && $this->search && $this->hasSearchable) {
-        //     $this->model = $this->searchOnModel();
-        //     // $count = $this->model->count();
-        // }
+        if ($this->model && $this->search && $this->hasSearchable) {
+            $this->model = $this->searchOnModel();
+            // $count = $this->model->count();
+        }
 
         $this->count = $this->model ? $this->model->count() : 0;
-        $model = $this->model ? $this->sortModel() : null;
-        // $model = $this->model ?? null;
+        // $model = $this->model ? $this->sortModel() : null;
+        $model = $this->model ?? null;
 
         $build = collect([]);        
 
