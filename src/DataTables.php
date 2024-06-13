@@ -80,14 +80,6 @@ class DataTables extends DataTablesQueryBuilders
     protected $draw = 0;
 
     /**
-     * Count
-     *
-     * @var array
-     * @author Luis Macayo
-     */
-    protected $count = 0;
-
-    /**
      * Query to execute
      *
      * @var array
@@ -322,15 +314,14 @@ class DataTables extends DataTablesQueryBuilders
      */
     protected function execute()
     {
+        $count = $this->model ? $this->model->count() : 0;
 
-        // if ($this->model && $this->search && $this->hasSearchable) {
-        //     $this->model = $this->searchOnModel();
-        //     // $count = $this->model->count();
-        // }
+        if ($this->model && $this->search && $this->hasSearchable) {
+            $this->model = $this->searchOnModel();
+            $count = $this->model->count();
+        }
 
-        $this->count = $this->model ? $this->model->count() : 0;
         $model = $this->model ? $this->sortModel() : null;
-        // $model = $this->model ?? null;
 
         $build = collect([]);        
 
@@ -343,23 +334,16 @@ class DataTables extends DataTablesQueryBuilders
 
         } else {
             if($model){
-                // $model->each(function($item, $key) use ($build) {
-                //     $build->put($key+$this->start, $item);
-                // });
-
-                $page = ($this->start / $this->length) + 1;
-                $items = $model->paginate($this->length, ['*'], 'page', $page);
-
-                foreach ($items as $key => $item) {
-                    $build->put($key + $this->start, $item);
-                }
+                $model->each(function($item, $key) use ($build) {
+                    $build->put($key+$this->start, $item);
+                });
                 
                 $collection  = $this->encryptKeys( $build->unique()->values()->toArray() );
             }
         }
         
-        $data['recordsTotal']    = $this->count;
-        $data['recordsFiltered'] = $this->count;
+        $data['recordsTotal']    = $count;
+        $data['recordsFiltered'] = $count;
         $data['data']            = $collection ?? [];
         
         return $data;
