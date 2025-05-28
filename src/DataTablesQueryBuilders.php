@@ -35,7 +35,7 @@ class DataTablesQueryBuilders extends Controller
      */
     public function where(string $column, $seperator, $value = null)
     {
-        $this->model   = $this->model->where($column, $seperator, $value);
+        $this->model = $this->model->where($column, $seperator, $value);
         $this->where[] = [
             $column, $seperator, $value
         ];
