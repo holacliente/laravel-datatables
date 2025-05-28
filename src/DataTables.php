@@ -314,38 +314,52 @@ class DataTables extends DataTablesQueryBuilders
      */
     protected function execute()
     {
-        $count = $this->model ? $this->model->count() : 0;
+        // Initial count, considering distinct if applicable
+        $count = $this->model ? ($this->distinctColumn ? $this->model->distinct($this->distinctColumn)->count($this->distinctColumn) : $this->model->count()) : 0;
 
         if ($this->model && $this->search && $this->hasSearchable) {
             $this->model = $this->searchOnModel();
-            $count = $this->model->count();
+            // Recalculate count after applying search filters
+            $count = $this->model ? ($this->distinctColumn ? $this->model->distinct($this->distinctColumn)->count($this->distinctColumn) : $this->model->count()) : 0;
         }
 
         $model = $this->model ? $this->sortModel() : null;
+        $build = collect([]);
 
-        $build = collect([]);        
-
-        if( $this->sql !== null ){
-            foreach (DB::select($this->sql) as $key => $item) {
+        if ($this->sql !== null) {
+            // Handle raw SQL or query builder
+            $results = $this->sql instanceof \Illuminate\Database\Eloquent\Builder 
+                ? $this->sql->get() 
+                : collect(DB::select($this->sql));
+            
+            // Apply distinct on the specified column if set
+            if (!empty($this->distinctColumn)) {
+                $results = $results->unique($this->distinctColumn)->values();
+            }
+            
+            foreach ($results as $key => $item) {
                 $build->put($key, $item);
             }
-
-            $collection  = $this->encryptKeys( $build->unique()->values()->toArray() );
-
+            $collection = $this->encryptKeys($build->values()->toArray());
         } else {
-            if($model){
-                $model->each(function($item, $key) use ($build) {
-                    $build->put($key+$this->start, $item);
+            if ($model) {
+                $model->each(function ($item, $key) use ($build) {
+                    $build->put($key + $this->start, $item);
                 });
                 
-                $collection  = $this->encryptKeys( $build->unique()->values()->toArray() );
+                // Apply distinct on the specified column if set
+                $collection = $this->encryptKeys(
+                    $this->distinctColumn 
+                        ? $build->unique($this->distinctColumn)->values()->toArray() 
+                        : $build->unique()->values()->toArray()
+                );
             }
         }
-        
-        $data['recordsTotal']    = $count;
+
+        $data['recordsTotal'] = $count;
         $data['recordsFiltered'] = $count;
-        $data['data']            = $collection ?? [];
-        
+        $data['data'] = $collection ?? [];
+
         return $data;
     }
 
