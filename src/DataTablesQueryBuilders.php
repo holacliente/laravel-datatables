@@ -200,4 +200,26 @@ class DataTablesQueryBuilders extends Controller
         }
         return $this;
     }
+
+    /**
+     * Apply distinct to the query
+     *
+     * @param string|null $column
+     * @return $this
+     */
+    public function distinct(string $column = null)
+    {
+        $this->distinctColumn = $column;
+        return $this;
+    }
+
+    /**
+     * Get the distinct column, if set
+     *
+     * @return string|null
+     */
+    public function getDistinctColumn()
+    {
+        return $this->distinctColumn;
+    }
 }
