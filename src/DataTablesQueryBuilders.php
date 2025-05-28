@@ -20,7 +20,7 @@ class DataTablesQueryBuilders extends Controller
     public function __call($name, $arguments)
     {
         if (!method_exists($this, $name) && starts_with($name, 'where')) {
-            return $this->where(strtolower(str_after($name, 'where')), ... $arguments);
+            return $this->where(strtolower(str_after($name, 'where')), ...$arguments);
         }
         return $this;
     }
