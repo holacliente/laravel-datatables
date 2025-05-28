@@ -163,6 +163,7 @@ class DataTablesQueryBuilders extends Controller
     public function with(...$with)
     {
         $with       = (isset($with[0]) && is_array($with[0])) ? $with[0] : $with;
+        $with = (isset($with[0]) && is_array($with[0])) ? $with[0] : $with;
         $this->with = $with;
         $this->model = $this->model->with($with);
         return $this;
