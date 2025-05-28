@@ -52,7 +52,7 @@ class DataTablesQueryBuilders extends Controller
      */
     public function whereIn(string $column, $value)
     {
-        $this->model     = $this->model->whereIn($column, $value);
+        $this->model = $this->model->whereIn($column, $value);
         $this->whereIn[] = [
             $column, $value
         ];
