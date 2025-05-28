@@ -110,7 +110,7 @@ class DataTablesQueryBuilders extends Controller
      */
     public function whereYear(string $column, $value)
     {
-        $this->model   = $this->model->whereYear($column, $value);
+        $this->model = $this->model->whereYear($column, $value);
         $this->where[] = [
             $column, $value
         ];
