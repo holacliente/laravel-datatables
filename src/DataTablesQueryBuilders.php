@@ -20,7 +20,7 @@ class DataTablesQueryBuilders extends Controller
     public function __call($name, $arguments)
     {
         if (!method_exists($this, $name) && starts_with($name, 'where')) {
-            return $this->where(strtolower(str_after($name, 'where')), ... $arguments);
+            return $this->where(strtolower(str_after($name, 'where')), ...$arguments);
         }
         return $this;
     }
@@ -35,7 +35,7 @@ class DataTablesQueryBuilders extends Controller
      */
     public function where(string $column, $seperator, $value = null)
     {
-        $this->model   = $this->model->where($column, $seperator, $value);
+        $this->model = $this->model->where($column, $seperator, $value);
         $this->where[] = [
             $column, $seperator, $value
         ];
@@ -52,7 +52,7 @@ class DataTablesQueryBuilders extends Controller
      */
     public function whereIn(string $column, $value)
     {
-        $this->model     = $this->model->whereIn($column, $value);
+        $this->model = $this->model->whereIn($column, $value);
         $this->whereIn[] = [
             $column, $value
         ];
@@ -110,7 +110,7 @@ class DataTablesQueryBuilders extends Controller
      */
     public function whereYear(string $column, $value)
     {
-        $this->model   = $this->model->whereYear($column, $value);
+        $this->model = $this->model->whereYear($column, $value);
         $this->where[] = [
             $column, $value
         ];
@@ -162,7 +162,7 @@ class DataTablesQueryBuilders extends Controller
      */
     public function with(...$with)
     {
-        $with       = (isset($with[0]) && is_array($with[0])) ? $with[0] : $with;
+        $with = (isset($with[0]) && is_array($with[0])) ? $with[0] : $with;
         $this->with = $with;
         $this->model = $this->model->with($with);
         return $this;
@@ -199,5 +199,27 @@ class DataTablesQueryBuilders extends Controller
             }
         }
         return $this;
+    }
+
+    /**
+     * Apply distinct to the query
+     *
+     * @param string|null $column
+     * @return $this
+     */
+    public function distinct(string $column = null)
+    {
+        $this->distinctColumn = $column;
+        return $this;
+    }
+
+    /**
+     * Get the distinct column, if set
+     *
+     * @return string|null
+     */
+    public function getDistinctColumn()
+    {
+        return $this->distinctColumn;
     }
 }
