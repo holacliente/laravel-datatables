@@ -71,6 +71,8 @@ class DataTables extends DataTablesQueryBuilders
      */
     protected $searchable;
 
+    protected $distinctColumn = null;
+
     /**
      * Cursor to seek sql
      *
