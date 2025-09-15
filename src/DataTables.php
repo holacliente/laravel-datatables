@@ -2,11 +2,10 @@
 
 namespace ACFBentveld\DataTables;
 
-use ACFBentveld\DataTables\DataTablesException;
 use Request;
 use Schema;
+use ACFBentveld\DataTables\DataTablesException;
 use ACFBentveld\DataTables\DataTablesQueryBuilders;
-
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -73,6 +72,12 @@ class DataTables extends DataTablesQueryBuilders
 
     protected $distinctColumn = null;
 
+    protected $start;
+
+    protected $length;
+    
+    protected $order;
+    
     /**
      * Cursor to seek sql
      *
@@ -149,7 +154,7 @@ class DataTables extends DataTablesQueryBuilders
      * The query method
      * Get results from query sql
      *
-     * @param \Illuminate\Database\Eloquent\Collection $collection
+     * @param mixed $query
      * @return $this
      * @throws DataTablesException
      * @author Luis Macayo
@@ -157,17 +162,19 @@ class DataTables extends DataTablesQueryBuilders
     public function query($query)
     {
         $this->sql = $query;
-
-        // $this->instanceCheck($collection);
-        // $allowedID     = $collection->pluck('id');
-        // $first         = $collection->first();
-        // $empty         = $first ? new $first : null;
-
         $this->build();
 
-        $this->model   = null;
-        $this->table   = null;
-        // $this->columns = Schema::getColumnListing($this->table);
+        // Obtener columnas desde la consulta si es posible
+        if ($query instanceof \Illuminate\Database\Eloquent\Builder) {
+            $this->model = $query;
+            $this->table = $query->getModel()->getTable();
+            $this->columns = Schema::getColumnListing($this->table);
+        } else {
+            // Para SQL crudo, intentar inferir columnas o establecer un array vacío
+            $this->model = null;
+            $this->table = null;
+            $this->columns = [];
+        }
 
         return $this;
     }
@@ -309,57 +316,121 @@ class DataTables extends DataTablesQueryBuilders
         exit;
     }
 
-    /**
-     * execute the queries
-     *
-     * @return array
-     */
     protected function execute()
     {
-        // Initial count, considering distinct if applicable
-        $count = $this->model ? ($this->distinctColumn ? $this->model->distinct($this->distinctColumn)->count($this->distinctColumn) : $this->model->count()) : 0;
-
-        if ($this->model && $this->search && $this->hasSearchable) {
-            $this->model = $this->searchOnModel();
-            // Recalculate count after applying search filters
-            $count = $this->model ? ($this->distinctColumn ? $this->model->distinct($this->distinctColumn)->count($this->distinctColumn) : $this->model->count()) : 0;
-        }
-
-        $model = $this->model ? $this->sortModel() : null;
-        $build = collect([]);
+        $count = 0;
+        $filteredCount = 0;
 
         if ($this->sql !== null) {
             // Handle raw SQL or query builder
-            $results = $this->sql instanceof \Illuminate\Database\Eloquent\Builder 
-                ? $this->sql->get() 
-                : collect(DB::select($this->sql));
-            
-            // Apply distinct on the specified column if set
-            if (!empty($this->distinctColumn)) {
-                $results = $results->unique($this->distinctColumn)->values();
+            if ($this->sql instanceof \Illuminate\Database\Eloquent\Builder) {
+                // Para Eloquent Builder
+                $countQuery = clone $this->sql;
+                
+                // Manejar distinct en el conteo
+                // if ($this->distinctColumn) {
+                //     $count = $countQuery->distinct($this->distinctColumn)->count($this->distinctColumn);
+                // } else {
+                // }
+                $count = $countQuery->count();
+                
+                // Aplicar búsqueda si existe
+                if ($this->search && $this->hasSearchable) {
+                    $filteredQuery = clone $this->sql;
+                    $filteredQuery = $this->applySearchToQuery($filteredQuery);
+                    
+                    // if ($this->distinctColumn) {
+                    //     $filteredCount = $filteredQuery->distinct($this->distinctColumn)->count($this->distinctColumn);
+                    // } else {
+                    // }
+                    $filteredCount = $filteredQuery->count();
+                } else {
+                    $filteredCount = $count;
+                }
+                
+                // Aplicar ordenamiento y paginación
+                $query = $this->sql;
+                foreach ($this->order as $order) {
+                    $query = $query->orderBy($order['column'], $order['dir']);
+                }
+                
+                if ($this->distinctColumn) {
+                    // $query = $query->distinct($this->distinctColumn);
+                }
+                
+                $results = $query->skip($this->start)->take($this->length)->get();
+                
+            } else {
+                // Para SQL crudo
+                if ($this->distinctColumn) {
+                    // Para SQL con DISTINCT, necesitamos contar de manera diferente
+                    // $countSql = "SELECT COUNT(DISTINCT {$this->distinctColumn}) as count FROM ({$this->sql}) as subquery";
+                } else {
+                    // $countSql = "SELECT COUNT(*) as count FROM ({$this->sql}) as subquery";
+                }
+                $countSql = "SELECT COUNT(*) as count FROM ({$this->sql}) as subquery";
+                
+                $countResult = DB::select($countSql);
+                $count = $countResult[0]->count ?? 0;
+                $filteredCount = $count;
+                
+                // Ejecutar consulta con paginación
+                // $baseSql = $this->distinctColumn ? "SELECT DISTINCT {$this->distinctColumn}, * FROM ({$this->sql}) as base" : $this->sql;
+                $baseSql = $this->sql;
+                
+                // Agregar ordenamiento si existe
+                if (!empty($this->order)) {
+                    $orderClauses = [];
+                    foreach ($this->order as $order) {
+                        $orderClauses[] = "{$order['column']} {$order['dir']}";
+                    }
+                    $baseSql .= " ORDER BY " . implode(', ', $orderClauses);
+                }
+                
+                $paginatedSql = $baseSql . " LIMIT {$this->start}, {$this->length}";
+                $results = collect(DB::select($paginatedSql));
             }
             
-            foreach ($results as $key => $item) {
-                $build->put($key, $item);
-            }
-            $collection = $this->encryptKeys($build->values()->toArray());
+            $collection = $this->encryptKeys($results->toArray());
+            
         } else {
+            // Código para modelo Eloquent normal
+            // if ($this->distinctColumn) {
+            //     // 
+            //     $count = $this->model->distinct($this->distinctColumn)->count($this->distinctColumn);
+            // } else {
+            // }
+            $count = $this->model->count();
+
+            if ($this->model && $this->search && $this->hasSearchable) {
+                $searchedModel = $this->searchOnModel();
+                
+                // if ($this->distinctColumn) {
+                //     $filteredCount = $searchedModel->distinct($this->distinctColumn)->count($this->distinctColumn);
+                // } else {
+                // }
+                $filteredCount = $searchedModel->count();
+                
+                $this->model = $searchedModel;
+            } else {
+                $filteredCount = $count;
+            }
+
+            $model = $this->model ? $this->sortModel() : null;
+            $build = collect([]);
+
             if ($model) {
                 $model->each(function ($item, $key) use ($build) {
-                    $build->put($key + $this->start, $item);
+                    $build->put($key, $item);
                 });
                 
-                // Apply distinct on the specified column if set
-                $collection = $this->encryptKeys(
-                    $this->distinctColumn 
-                        ? $build->unique($this->distinctColumn)->values()->toArray() 
-                        : $build->unique()->values()->toArray()
-                );
+                // Aplicar distinct si es necesario (ya debería estar aplicado a nivel de consulta)
+                $collection = $this->encryptKeys($build->values()->toArray());
             }
         }
 
         $data['recordsTotal'] = $count;
-        $data['recordsFiltered'] = $count;
+        $data['recordsFiltered'] = $filteredCount;
         $data['data'] = $collection ?? [];
 
         return $data;
@@ -372,7 +443,12 @@ class DataTables extends DataTablesQueryBuilders
      */
     private function sortModel()
     {
-        $build = $this->hasSearchable ? ( ($this->length < 0)? $this->model : $this->model->skip($this->start)->take($this->length) ) : $this->model;
+        // Aplicar distinct primero si está configurado
+        if ($this->distinctColumn) {
+            $this->model = $this->model->distinct($this->distinctColumn);
+        }
+
+        $build = $this->hasSearchable ? ( ($this->length < 0) ? $this->model : $this->model->skip($this->start)->take($this->length) ) : $this->model;
 
         $model = null;
 
@@ -400,7 +476,6 @@ class DataTables extends DataTablesQueryBuilders
 
         return $model;
     }
-
     /**
      * Search on the model
      *
@@ -615,5 +690,83 @@ class DataTables extends DataTablesQueryBuilders
     public function withKeys()
     {
         return $this;
+    }
+
+    /**
+     * Aplicar búsqueda a query builder
+     */
+    private function applySearchToQuery($query)
+    {
+        return $query->where(function($q) {
+            foreach($this->searchable as $index => $column){
+                if(str_contains($column, '.')){
+                    $this->searchOnRelation($column, $q);
+                } else {
+                    $this->searchOnQuery($column, $q, $index);
+                }
+            }
+        });
+    }
+
+    /**
+     * Aplicar ordenamiento y límite a query builder con manejo de DISTINCT
+     */
+    private function applyOrderAndLimit($query)
+    {
+        // Aplicar distinct primero si está configurado
+        if ($this->distinctColumn) {
+            $query = $query->distinct($this->distinctColumn);
+        }
+        
+        // Aplicar ordenamiento
+        foreach ($this->order as $order) {
+            $query = $query->orderBy($order['column'], $order['dir']);
+        }
+        
+        // Aplicar paginación
+        return $query->skip($this->start)->take($this->length);
+    }
+
+    private function getCountForRawSql($sql)
+    {
+        if ($this->distinctColumn) {
+            // Para consultas con DISTINCT, contar valores únicos
+            $countSql = "SELECT COUNT(DISTINCT {$this->distinctColumn}) as count FROM ({$sql}) as subquery";
+        } else {
+            $countSql = "SELECT COUNT(*) as count FROM ({$sql}) as subquery";
+        }
+        
+        try {
+            $result = DB::select($countSql);
+            return $result[0]->count ?? 0;
+        } catch (\Exception $e) {
+            // Fallback si hay error en la consulta de count
+            return 0;
+        }
+    }
+
+    /**
+     * Agregar paginación a SQL crudo con manejo de DISTINCT
+     */
+    private function addPaginationToSql($sql)
+    {
+        $baseSql = $sql;
+        
+        // Si hay distinct column, asegurarse de seleccionarla
+        if ($this->distinctColumn && !str_contains(strtoupper($sql), 'DISTINCT')) {
+            $baseSql = "SELECT DISTINCT {$this->distinctColumn}, * FROM ({$sql}) as base_query";
+        }
+        
+        // Agregar ordenamiento
+        if (!empty($this->order)) {
+            $orderClauses = [];
+            foreach ($this->order as $order) {
+                $orderClauses[] = "{$order['column']} {$order['dir']}";
+            }
+            $baseSql .= " ORDER BY " . implode(', ', $orderClauses);
+        }
+        
+        // Agregar paginación (sintaxis MySQL)
+        return $baseSql . " LIMIT {$this->start}, {$this->length}";
     }
 }
