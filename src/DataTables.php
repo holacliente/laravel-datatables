@@ -328,22 +328,22 @@ class DataTables extends DataTablesQueryBuilders
                 $countQuery = clone $this->sql;
                 
                 // Manejar distinct en el conteo
-                if ($this->distinctColumn) {
-                    $count = $countQuery->distinct($this->distinctColumn)->count($this->distinctColumn);
-                } else {
-                    $count = $countQuery->count();
-                }
+                // if ($this->distinctColumn) {
+                //     $count = $countQuery->distinct($this->distinctColumn)->count($this->distinctColumn);
+                // } else {
+                // }
+                $count = $countQuery->count();
                 
                 // Aplicar búsqueda si existe
                 if ($this->search && $this->hasSearchable) {
                     $filteredQuery = clone $this->sql;
                     $filteredQuery = $this->applySearchToQuery($filteredQuery);
                     
-                    if ($this->distinctColumn) {
-                        $filteredCount = $filteredQuery->distinct($this->distinctColumn)->count($this->distinctColumn);
-                    } else {
-                        $filteredCount = $filteredQuery->count();
-                    }
+                    // if ($this->distinctColumn) {
+                    //     $filteredCount = $filteredQuery->distinct($this->distinctColumn)->count($this->distinctColumn);
+                    // } else {
+                    // }
+                    $filteredCount = $filteredQuery->count();
                 } else {
                     $filteredCount = $count;
                 }
@@ -355,7 +355,7 @@ class DataTables extends DataTablesQueryBuilders
                 }
                 
                 if ($this->distinctColumn) {
-                    $query = $query->distinct($this->distinctColumn);
+                    // $query = $query->distinct($this->distinctColumn);
                 }
                 
                 $results = $query->skip($this->start)->take($this->length)->get();
@@ -364,17 +364,19 @@ class DataTables extends DataTablesQueryBuilders
                 // Para SQL crudo
                 if ($this->distinctColumn) {
                     // Para SQL con DISTINCT, necesitamos contar de manera diferente
-                    $countSql = "SELECT COUNT(DISTINCT {$this->distinctColumn}) as count FROM ({$this->sql}) as subquery";
+                    // $countSql = "SELECT COUNT(DISTINCT {$this->distinctColumn}) as count FROM ({$this->sql}) as subquery";
                 } else {
-                    $countSql = "SELECT COUNT(*) as count FROM ({$this->sql}) as subquery";
+                    // $countSql = "SELECT COUNT(*) as count FROM ({$this->sql}) as subquery";
                 }
+                $countSql = "SELECT COUNT(*) as count FROM ({$this->sql}) as subquery";
                 
                 $countResult = DB::select($countSql);
                 $count = $countResult[0]->count ?? 0;
                 $filteredCount = $count;
                 
                 // Ejecutar consulta con paginación
-                $baseSql = $this->distinctColumn ? "SELECT DISTINCT {$this->distinctColumn}, * FROM ({$this->sql}) as base" : $this->sql;
+                // $baseSql = $this->distinctColumn ? "SELECT DISTINCT {$this->distinctColumn}, * FROM ({$this->sql}) as base" : $this->sql;
+                $baseSql = $this->sql;
                 
                 // Agregar ordenamiento si existe
                 if (!empty($this->order)) {
