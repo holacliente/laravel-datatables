@@ -4,7 +4,7 @@ All notable changes to `DataTables` will be documented in this file
 
 # Version 2
 
-## 2.2.0 (Current - 2026-04-12)
+## 2.3.0 (Current - 2026-04-12)
 
 ### 🆕 PHP 7.4+ Compatibility Enhancement
 
@@ -25,6 +25,11 @@ All notable changes to `DataTables` will be documented in this file
 - Better readability and clarity
 - Recommended in official PHP 7.4+ documentation
 - No functional difference, pure compatibility improvement
+
+## 2.2.0 (2026-04-12)
+
+- 📚 Initial documentation update
+- 📝 Organized changelog with historical versions
 
 ## 2.0.26
 

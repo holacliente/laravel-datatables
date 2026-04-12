@@ -163,7 +163,7 @@ DataTables::model(new Post())
 
 ## Changelog
 
-### v2.2.0 (Actual)
+### v2.3.0 (Actual)
 
 **🆕 Mejoras de Compatibilidad con PHP 7.4+**
 
