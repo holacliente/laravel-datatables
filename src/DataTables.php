@@ -309,7 +309,7 @@ class DataTables extends DataTablesQueryBuilders
         $response = response()->json($data);
 
         foreach($response->headers->all() as $header => $value){
-            $set = implode(',', $value);
+            $set = join(',', $value);
             header("$header: $set");
         }
         echo $response->getContent();
@@ -384,7 +384,7 @@ class DataTables extends DataTablesQueryBuilders
                     foreach ($this->order as $order) {
                         $orderClauses[] = "{$order['column']} {$order['dir']}";
                     }
-                    $baseSql .= " ORDER BY " . implode(', ', $orderClauses);
+                    $baseSql .= " ORDER BY " . join(', ', $orderClauses);
                 }
                 
                 $paginatedSql = $baseSql . " LIMIT {$this->start}, {$this->length}";
@@ -758,13 +758,13 @@ class DataTables extends DataTablesQueryBuilders
         }
         
         // Agregar ordenamiento
-        if (!empty($this->order)) {
-            $orderClauses = [];
-            foreach ($this->order as $order) {
-                $orderClauses[] = "{$order['column']} {$order['dir']}";
-            }
-            $baseSql .= " ORDER BY " . implode(', ', $orderClauses);
-        }
+         if (!empty($this->order)) {
+             $orderClauses = [];
+             foreach ($this->order as $order) {
+                 $orderClauses[] = "{$order['column']} {$order['dir']}";
+             }
+             $baseSql .= " ORDER BY " . join(', ', $orderClauses);
+         }
         
         // Agregar paginación (sintaxis MySQL)
         return $baseSql . " LIMIT {$this->start}, {$this->length}";
