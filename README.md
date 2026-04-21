@@ -163,7 +163,21 @@ DataTables::model(new Post())
 
 ## Changelog
 
-### v2.4.0 (Actual)
+### v2.4.5 (Actual)
+
+**🚀 Endurecimiento del modo cursor + select()**
+
+- ⚡ **Se omiten los `COUNT(*)`** (total y filtrado) en páginas siguientes cuando
+  `cursorPaginate()` está activo y se envía `?cursor=...`. Reduce de 3 a 1 query
+  pesada por request a partir de la segunda página.
+- 🔧 **Cursor robusto**: ya no fuerza `(int)` — soporta UUIDs, timestamps y hashes.
+  La dirección (`<` o `>`) se infiere del `ORDER BY` solicitado.
+- 🐛 **Search aplicada al query con cursor** (antes solo afectaba al COUNT filtrado).
+- 🛡️ **Guard para `select([])` vacío**: si tras `exclude()`/`select()` no quedan
+  columnas, se descarta la cláusula en vez de generar SQL inválido.
+- ✅ 100% retro-compatible.
+
+### v2.4.0
 
 **🚀 Optimizaciones de Rendimiento: Paginación por Cursor (Keyset)**
 
