@@ -101,6 +101,14 @@ class DataTables extends DataTablesQueryBuilders
      * @var string|null
      */
     protected $cursorColumn = null;
+
+    /**
+     * Explicit column list set via select() or exclude().
+     * When non-null, a SELECT clause is applied instead of SELECT *.
+     *
+     * @var array|null
+     */
+    protected $selectColumns = null;
     
     /**
      * The table ID
@@ -342,45 +350,49 @@ class DataTables extends DataTablesQueryBuilders
     {
         $count = 0;
         $filteredCount = 0;
+        $skipCounts = $this->cursorColumn !== null && Request::get('cursor') !== null;
 
         if ($this->sql !== null) {
             // Handle raw SQL or query builder
             if ($this->sql instanceof \Illuminate\Database\Eloquent\Builder) {
                 // Para Eloquent Builder
-                $countQuery = clone $this->sql;
-                
-                // Manejar distinct en el conteo
-                // if ($this->distinctColumn) {
-                //     $count = $countQuery->distinct($this->distinctColumn)->count($this->distinctColumn);
-                // } else {
-                // }
-                $count = $countQuery->count();
-                
+                if (!$skipCounts) {
+                    $countQuery = clone $this->sql;
+                    $count = $countQuery->count();
+                }
+
                 // Aplicar búsqueda si existe
                 if ($this->search && $this->hasSearchable) {
                     $filteredQuery = clone $this->sql;
                     $filteredQuery = $this->applySearchToQuery($filteredQuery);
-                    
-                    // if ($this->distinctColumn) {
-                    //     $filteredCount = $filteredQuery->distinct($this->distinctColumn)->count($this->distinctColumn);
-                    // } else {
-                    // }
-                    $filteredCount = $filteredQuery->count();
+
+                    if (!$skipCounts) {
+                        $filteredCount = $filteredQuery->count();
+                    }
                 } else {
                     $filteredCount = $count;
                 }
-                
+
                 // Aplicar ordenamiento y paginación
-                $query = $this->sql;
+                $query = ($this->search && $this->hasSearchable)
+                    ? (isset($filteredQuery) ? $filteredQuery : $this->sql)
+                    : $this->sql;
+
+                if ($this->selectColumns !== null) {
+                    $query = $query->select($this->selectColumns);
+                }
                 foreach ($this->order as $order) {
                     $query = $query->orderBy($order['column'], $order['dir']);
                 }
 
                 if ($this->cursorColumn !== null) {
-                    $cursor = (int) Request::get('cursor', 0);
-                    $results = $query->where($this->cursorColumn, '>', $cursor)
-                        ->limit($this->length)
-                        ->get();
+                    $cursor = Request::get('cursor');
+                    $direction = isset($this->order[0]['dir']) ? $this->order[0]['dir'] : 'asc';
+                    $operator = strtolower($direction) === 'desc' ? '<' : '>';
+                    if ($cursor !== null && $cursor !== '') {
+                        $query = $query->where($this->cursorColumn, $operator, $cursor);
+                    }
+                    $results = $query->limit($this->length)->get();
                 } else {
                     $results = $query->skip($this->start)->take($this->length)->get();
                 }
@@ -424,22 +436,17 @@ class DataTables extends DataTablesQueryBuilders
 
         } else {
             // Código para modelo Eloquent normal
-            // if ($this->distinctColumn) {
-            //     // 
-            //     $count = $this->model->distinct($this->distinctColumn)->count($this->distinctColumn);
-            // } else {
-            // }
-            $count = $this->model->count();
+            if (!$skipCounts) {
+                $count = $this->model->count();
+            }
 
             if ($this->model && $this->search && $this->hasSearchable) {
                 $searchedModel = $this->searchOnModel();
-                
-                // if ($this->distinctColumn) {
-                //     $filteredCount = $searchedModel->distinct($this->distinctColumn)->count($this->distinctColumn);
-                // } else {
-                // }
-                $filteredCount = $searchedModel->count();
-                
+
+                if (!$skipCounts) {
+                    $filteredCount = $searchedModel->count();
+                }
+
                 $this->model = $searchedModel;
             } else {
                 $filteredCount = $count;
@@ -447,9 +454,16 @@ class DataTables extends DataTablesQueryBuilders
 
             // Cursor pagination en path modelo normal
             if ($this->cursorColumn !== null && $this->model) {
-                $cursor = (int) Request::get('cursor', 0);
-                $cursorQuery = $this->model->where($this->cursorColumn, '>', $cursor)
-                    ->limit($this->length);
+                $cursor = Request::get('cursor');
+                $direction = isset($this->order[0]['dir']) ? $this->order[0]['dir'] : 'asc';
+                $operator = strtolower($direction) === 'desc' ? '<' : '>';
+                $cursorQuery = $this->model->limit($this->length);
+                if ($cursor !== null && $cursor !== '') {
+                    $cursorQuery = $cursorQuery->where($this->cursorColumn, $operator, $cursor);
+                }
+                if ($this->selectColumns !== null) {
+                    $cursorQuery = $cursorQuery->select($this->selectColumns);
+                }
                 foreach ($this->order as $order) {
                     $cursorQuery = $cursorQuery->orderBy($order['column'], $order['dir']);
                 }
@@ -490,6 +504,10 @@ class DataTables extends DataTablesQueryBuilders
      */
     private function sortModel()
     {
+        if ($this->selectColumns !== null) {
+            $this->model = $this->model->select($this->selectColumns);
+        }
+
         if ($this->distinctColumn) {
             $this->model = $this->model->distinct($this->distinctColumn);
         }

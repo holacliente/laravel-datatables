@@ -181,6 +181,8 @@ class DataTablesQueryBuilders extends Controller
                 unset($this->columns[$key]);
             }
         }
+        $cols = array_values($this->columns);
+        $this->selectColumns = !empty($cols) ? $cols : null;
         return $this;
     }
 
@@ -198,6 +200,8 @@ class DataTablesQueryBuilders extends Controller
                 unset($this->columns[$key]);
             }
         }
+        $cols = array_values($this->columns);
+        $this->selectColumns = !empty($cols) ? $cols : null;
         return $this;
     }
 

@@ -4,7 +4,39 @@ All notable changes to `DataTables` will be documented in this file
 
 # Version 2
 
-## 2.4.0 (Current - 2026-04-20)
+## 2.4.5 (Current - 2026-04-20)
+
+### 🚀 Performance & Robustness Hardening (cursor pagination + select)
+
+Follow-up to 2.4.0 fixing latent bugs and reducing query load further.
+
+#### ⚡ Skip `COUNT(*)` on subsequent cursor pages
+- When `cursorPaginate()` is active and the request includes a `cursor`,
+  both `recordsTotal` and `recordsFiltered` `COUNT(*)` queries are skipped.
+- First page (no cursor) still computes counts so the UI can display totals.
+- Eliminates 2 heavy queries per request after the first page on big tables.
+
+#### 🔧 Cursor pagination robustness
+- Cursor value is no longer cast to `int` — supports UUIDs, timestamps and hashes.
+- Direction inferred from `$this->order[0]['dir']`: `DESC` uses `<`, `ASC` uses `>`.
+- Empty/missing `cursor` no longer adds a spurious `WHERE` clause (first page works correctly).
+
+#### 🐛 Search now applied to cursor query
+- Previously `applySearchToQuery()` only affected `$filteredCount`; the paginated
+  result set ignored the search filter. Fixed: paginated query reuses `$filteredQuery`.
+
+#### 🛡️ `select()` / `exclude()` empty guard
+- If the resulting column list is empty, `selectColumns` falls back to `null`
+  instead of producing invalid `SELECT FROM ...` SQL.
+
+#### 📁 Files modified
+- `src/DataTables.php`
+- `src/DataTablesQueryBuilders.php`
+
+#### ✅ Backward compatibility
+- 100% backward compatible.
+
+## 2.4.0 (2026-04-20)
 
 ### 🚀 Performance: Keyset (Cursor) Pagination & SQL Push-Down
 
