@@ -4,7 +4,51 @@ All notable changes to `DataTables` will be documented in this file
 
 # Version 2
 
-## 2.3.0 (Current - 2026-04-12)
+## 2.4.0 (Current - 2026-04-20)
+
+### 🚀 Performance: Keyset (Cursor) Pagination & SQL Push-Down
+
+This release targets slow queries caused by deep `OFFSET` pagination and
+in-memory sorting/pagination on large tables.
+
+#### 🆕 New: `cursorPaginate()` (opt-in, backward compatible)
+
+- Replaces `LIMIT n OFFSET m` with `WHERE column > :cursor LIMIT n` (keyset pagination)
+- Eliminates the linear cost of high `OFFSET` values on large tables
+- Response JSON now includes a `nextCursor` key when active
+- Works with both `model()` and `query()` (Eloquent Builder) paths
+
+```php
+DataTables::query(
+    Result::query()
+        ->join('reports', 'results.report_id', '=', 'reports.id')
+        ->where('reports.campaign_id', $campaignId)
+)
+->cursorPaginate('results.id')   // <- new
+->get();
+```
+
+The frontend should send `?cursor=<nextCursor>` on subsequent requests.
+
+#### ⚡ `sortModel()` push-down optimization
+
+- When no search is active, `ORDER BY` + `LIMIT` are now pushed down to SQL
+- Previously the full table was loaded into PHP and sliced in memory
+- Massive reduction in memory usage and query time on large tables
+
+#### 🛡️ Type-safety fixes
+
+- `start` and `length` request parameters are now cast to `int` with sane defaults
+  (`0` and `10` respectively) preventing silent string-coercion bugs
+
+#### 📁 Files modified
+- `src/DataTables.php`
+
+#### ✅ Backward compatibility
+- 100% backward compatible — all changes are opt-in or transparent optimizations
+- Existing code works unchanged
+
+## 2.3.0 (2026-04-12)
 
 ### 🆕 PHP 7.4+ Compatibility Enhancement
 

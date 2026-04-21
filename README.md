@@ -163,7 +163,41 @@ DataTables::model(new Post())
 
 ## Changelog
 
-### v2.3.0 (Actual)
+### v2.4.0 (Actual)
+
+**🚀 Optimizaciones de Rendimiento: Paginación por Cursor (Keyset)**
+
+Esta versión ataca los cuellos de botella en consultas con `OFFSET` profundo
+y ordenamiento/paginación en memoria sobre tablas grandes.
+
+- ✨ **Nuevo método `cursorPaginate(string $column = 'id')`** (opt-in)
+  - Reemplaza `LIMIT n OFFSET m` por `WHERE column > :cursor LIMIT n`
+  - Elimina el costo lineal de `OFFSET` alto en tablas grandes
+  - La respuesta JSON incluye `nextCursor` cuando está activo
+- ⚡ **`sortModel()` ahora empuja `ORDER BY` + `LIMIT` al SQL** cuando no hay
+  búsqueda activa (antes traia toda la tabla a PHP y aplicaba `slice()`)
+- 🛡️ **`start` y `length` se castean a `int`** con defaults seguros (`0` y `10`)
+- ✅ 100% retro-compatible — nada cambia para código existente
+
+**Ejemplo de uso del cursor pagination:**
+
+```php
+DataTables::query(
+    Result::query()
+        ->join('reports', 'results.report_id', '=', 'reports.id')
+        ->where('reports.campaign_id', $campaignId)
+)
+->cursorPaginate('results.id')
+->get();
+```
+
+El frontend debe enviar `?cursor=<nextCursor>` en cada request siguiente.
+
+> **Nota:** La paginación por cursor no permite saltar a una página arbitraria
+> por número — solo navegación secuencial (siguiente). Ideal para tablas
+> grandes donde el usuario hace scroll/next-page lineal o procesos de exportación.
+
+### v2.3.0
 
 **🆕 Mejoras de Compatibilidad con PHP 7.4+**
 
