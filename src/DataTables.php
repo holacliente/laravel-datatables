@@ -93,6 +93,14 @@ class DataTables extends DataTablesQueryBuilders
      * @author Luis Macayo
      */
     protected $sql = null;
+
+    /**
+     * Column used for keyset (cursor) pagination.
+     * When set, replaces OFFSET with WHERE column > cursor.
+     *
+     * @var string|null
+     */
+    protected $cursorColumn = null;
     
     /**
      * The table ID
@@ -202,8 +210,8 @@ class DataTables extends DataTablesQueryBuilders
                 ];
             }
 
-            $this->start  = Request::get('start');
-            $this->length = Request::get('length');
+            $this->start  = (int) Request::get('start', 0);
+            $this->length = (int) Request::get('length', 10);
             $this->search = Request::has('search') && Request::get('search')['value'] ? Request::get('search') : null;
         }
         return $this;
@@ -250,6 +258,20 @@ class DataTables extends DataTablesQueryBuilders
             throw new DataTablesException('Model must be an instance of Illuminate\Database\Eloquent\Model or an instance of Illuminate\Database\Eloquent\Collection');
         }
         return true;
+    }
+
+    /**
+     * Enable keyset (cursor) pagination to avoid deep OFFSET scans.
+     * Replaces LIMIT x OFFSET n with WHERE column > :cursor LIMIT n.
+     * The response JSON will include a "nextCursor" key.
+     *
+     * @param string $column  Indexed column to seek on (default: 'id')
+     * @return $this
+     */
+    public function cursorPaginate(string $column = 'id'): self
+    {
+        $this->cursorColumn = $column;
+        return $this;
     }
 
     /**
@@ -353,12 +375,15 @@ class DataTables extends DataTablesQueryBuilders
                 foreach ($this->order as $order) {
                     $query = $query->orderBy($order['column'], $order['dir']);
                 }
-                
-                if ($this->distinctColumn) {
-                    // $query = $query->distinct($this->distinctColumn);
+
+                if ($this->cursorColumn !== null) {
+                    $cursor = (int) Request::get('cursor', 0);
+                    $results = $query->where($this->cursorColumn, '>', $cursor)
+                        ->limit($this->length)
+                        ->get();
+                } else {
+                    $results = $query->skip($this->start)->take($this->length)->get();
                 }
-                
-                $results = $query->skip($this->start)->take($this->length)->get();
                 
             } else {
                 // Para SQL crudo
@@ -392,7 +417,11 @@ class DataTables extends DataTablesQueryBuilders
             }
             
             $collection = $this->encryptKeys($results->toArray());
-            
+
+            if ($this->cursorColumn !== null && !$results->isEmpty()) {
+                $data['nextCursor'] = $results->last()->{$this->cursorColumn};
+            }
+
         } else {
             // Código para modelo Eloquent normal
             // if ($this->distinctColumn) {
@@ -416,6 +445,25 @@ class DataTables extends DataTablesQueryBuilders
                 $filteredCount = $count;
             }
 
+            // Cursor pagination en path modelo normal
+            if ($this->cursorColumn !== null && $this->model) {
+                $cursor = (int) Request::get('cursor', 0);
+                $cursorQuery = $this->model->where($this->cursorColumn, '>', $cursor)
+                    ->limit($this->length);
+                foreach ($this->order as $order) {
+                    $cursorQuery = $cursorQuery->orderBy($order['column'], $order['dir']);
+                }
+                $results = $cursorQuery->get();
+                $collection = $this->encryptKeys($results->toArray());
+                if (!$results->isEmpty()) {
+                    $data['nextCursor'] = $results->last()->{$this->cursorColumn};
+                }
+                $data['recordsTotal'] = $count;
+                $data['recordsFiltered'] = $filteredCount;
+                $data['data'] = $collection;
+                return $data;
+            }
+
             $model = $this->model ? $this->sortModel() : null;
             $build = collect([]);
 
@@ -423,8 +471,7 @@ class DataTables extends DataTablesQueryBuilders
                 $model->each(function ($item, $key) use ($build) {
                     $build->put($key, $item);
                 });
-                
-                // Aplicar distinct si es necesario (ya debería estar aplicado a nivel de consulta)
+
                 $collection = $this->encryptKeys($build->values()->toArray());
             }
         }
@@ -443,34 +490,48 @@ class DataTables extends DataTablesQueryBuilders
      */
     private function sortModel()
     {
-        // Aplicar distinct primero si está configurado
         if ($this->distinctColumn) {
             $this->model = $this->model->distinct($this->distinctColumn);
         }
 
-        $build = $this->hasSearchable ? ( ($this->length < 0) ? $this->model : $this->model->skip($this->start)->take($this->length) ) : $this->model;
+        $build = $this->hasSearchable
+            ? (($this->length < 0) ? $this->model : $this->model->skip($this->start)->take($this->length))
+            : $this->model;
 
         $model = null;
+        $sqlPaginated = false;
 
         foreach ($this->order as $index => $order) {
             $sortByRelation = str_contains($order['column'], '.');
 
-            if($index === 0) {
+            if ($index === 0) {
                 if ($sortByRelation) {
-                    $model = $order['dir'] === 'asc' ? $build->get()->sortBy($order['column']) : $build->get()->sortByDesc($order['column']);
+                    // Columna de relación: no se puede empujar ORDER BY a SQL sin JOIN — ordena en PHP
+                    $model = $order['dir'] === 'asc'
+                        ? $build->get()->sortBy($order['column'])
+                        : $build->get()->sortByDesc($order['column']);
+                } elseif (!$this->hasSearchable && !$this->search) {
+                    // Optimización: empuja ORDER BY + LIMIT al SQL en vez de traer toda la tabla a PHP
+                    $model = $build->orderBy($order['column'], $order['dir'])
+                        ->skip($this->start)
+                        ->take($this->length)
+                        ->get();
+                    $sqlPaginated = true;
                 } else {
                     $model = $build->orderBy($order['column'], $order['dir'])->get();
                 }
             } else {
-                $model = $order['dir'] === 'asc' ? $model->sortBy($order['column']) : $model->sortByDesc($order['column']);
+                $model = $order['dir'] === 'asc'
+                    ? $model->sortBy($order['column'])
+                    : $model->sortByDesc($order['column']);
             }
         }
 
-        if($this->search && !$this->hasSearchable) {
+        if ($this->search && !$this->hasSearchable) {
             $model = $this->searchOnCollection($model);
         }
 
-        if(!$this->hasSearchable) {
+        if (!$this->hasSearchable && !$sqlPaginated) {
             return $model->slice($this->start, $this->length);
         }
 
